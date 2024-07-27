@@ -19,7 +19,17 @@ body{
     font-family: 'REM', sans-serif;
     font-weight: 500;
 }
+nav{
+  /* background: rgba(0, 255, 0, 0.2);
 
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+position: fixed;
+top: 0;
+width: 100%;input-se
+z-index: 9999; */
+}
 nav a{
   margin-left: 0 !important;
 }
@@ -33,7 +43,7 @@ nav a{
   }
 
   .input-search {
-    @apply border-2 border-gray-300 rounded-lg px-4 py-2 text-lg w-full;
+    @apply border-2 border-gray-300 rounded-lg px-4 py-2 text-lg w-full md:text-base;
   }
 
   .no-results {
@@ -54,15 +64,15 @@ nav a{
     }
   
     .surah-number {
-      @apply text-4xl font-bold text-gray-700;
+      @apply text-4xl font-bold text-gray-700 md:text-3xl;
       
     }
   
     .surah-title {
-      @apply text-xl font-semibold text-gray-800;
+      @apply text-xl font-semibold text-gray-800 md:text-lg;
       
       
-      
+  
     }
   
     .surah-subtitle {
@@ -87,7 +97,7 @@ nav a{
     }
   
     .ayah-card {
-      @apply bg-zinc-100 p-6 rounded-xl hover:bg-gray-200 transition-all duration-300 hover:scale-[101%] sm:p-0;
+      @apply bg-zinc-100 p-6 rounded-xl hover:bg-gray-200 transition-all duration-300 hover:scale-[101%] sm:p-0 cursor-pointer;
     }
   
     .ayah-icon {
@@ -95,8 +105,9 @@ nav a{
     }
   
     .ayah-text {
-      @apply text-lg font-medium text-gray-800 md:text-sm;
+      @apply text-lg font-medium text-gray-800 md:text-sm ;
       font-family: "Raleway", sans-serif;
+      text-align: center;
     }
   
     .arabic-text {
@@ -108,7 +119,7 @@ nav a{
     }
   
     .modal-content {
-      @apply bg-white p-6 rounded-lg shadow-lg w-auto ;
+      @apply bg-white p-6 rounded-lg shadow-lg w-[90%] ;
     }
   
     .modal-button {
@@ -163,6 +174,7 @@ nav a{
     margin-right: auto;
     margin-bottom: 10px;
     text-align: center;
+    @apply md:text-[30px]
   }
   
   /* Custom styles if needed */
@@ -172,6 +184,8 @@ nav a{
   
   .ayah-card:hover {
     /* transform: scale(1.02); */
+    /* background-color: #888; */
+    transition: .5s;
   }
   
   .ayah-text,
