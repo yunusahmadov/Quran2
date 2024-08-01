@@ -35,7 +35,7 @@ nav a{
 }
 @layer components {
   .btn-search {
-    @apply bg-green-500 text-white font-semibold rounded-lg px-4 py-2 transition-transform transform hover:scale-105;
+    @apply bg-green-500 text-white font-semibold rounded-lg px-4 py-[7px] transition-transform transform hover:scale-105 md:py-[6px];
   }
   
   .card {

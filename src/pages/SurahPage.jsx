@@ -107,7 +107,8 @@ function SurahPage() {
         <h1 className='surah-name'>Сура- </h1>
         <h2 className='text-2xl surah-name'>{surahName}</h2>
       </div>
-      <div className='flex flex-col gap-5 p-8'>
+      <div className='flex flex-col gap-5 p-7'>
+
         <div className="flex items-center justify-between gap-4 md:flex-col ">
           <button className='btn-toggle text-md' onClick={() => setArabTextVisible(!arabTextVisible)}>
             {arabTextVisible ? 'Скрыть Арабский текст' : 'Показать Арабский текст'}
@@ -142,7 +143,8 @@ function SurahPage() {
                 <img src={ico} alt="" className='ayah-icon' />
                 <p className='absolute top-[9px] text-xl font-bold text-gray-700'>{ayah.numberInSurah}</p>
               </div>
-              <div className='flex flex-col w-full ml-5 md:justify-center items-center'>
+              <div className='flex flex-col w-full md:justify-center items-center'>
+
                 <div className='ayah-text text-lg sm:text-sm'>{ayah.text}</div>
                 {arabTextVisible && <div className='arabic-text text-lg sm:text-sm'>
                   {arabText.length ? arabText[index]?.text : <p>Загрузка...</p>}

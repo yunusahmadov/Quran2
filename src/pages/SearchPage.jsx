@@ -40,7 +40,7 @@ function SearchPage() {
         <h1 className="text-center title-page">Искать в Коране</h1>
       </div>
       <div className="p-5 md:p-3 text-center">
-        <p className="text-lg font-medium text-gray-700 mt-4 raleway">
+        <p className="text-lg font-medium text-gray-700 mt-4 raleway md:text-base sm:text-sm">
           Здесь вы можете искать слова и аяты из Корана.
         </p>
         <div className="flex items-center bg-gray-100 p-5 rounded-lg shadow-md mb-6">
@@ -52,7 +52,7 @@ function SearchPage() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button onClick={handleSearch} className="btn-search ml-1">
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass mt-2"></i>
           </button>
         </div>
         <div className="flex flex-col gap-5">
