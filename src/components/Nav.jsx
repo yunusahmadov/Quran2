@@ -17,20 +17,20 @@ function Nav() {
   };
 
   return (
-    <nav className="bg-green-800 text-white px-6 shadow-md ">
-      <div className="container mx-auto flex items-center justify-between mt-3">
+    <nav className="bg-green-800 text-white  shadow-md ">
+      <div className=" mx-auto flex items-center justify-between mt-3 px-12 ml-auto mr-auto">
         <div className="flex items-center">
           <img onClick={goToMain} src={logo} alt="logo" className="h-10 w-10 mr-3 cursor-pointer" />
-          <h1 className="text-3xl font-bold md:text-xl sm:text-[16px]">﷽</h1>
+          <h1 className="text-3xl lg:text-xl font-bold md:hidden sm:text-base ">﷽</h1>
         </div>
         <div className="md:hidden space-x-4 ">
-          <Link to="/" className="px-2 py-2 rounded hover:bg-green-700 transition duration-300 nav-link lg:text-lg lg:p-1">
+          <Link to="/" className="px-2 py-2 rounded hover:bg-green-700 transition duration-300 nav-link lg:text-lg ">
             Все Суры
           </Link>
-          <Link to="/search" className="px-3 py-2 rounded hover:bg-green-700 transition duration-300 nav-link lg:text-lg lg:p-1">
+          <Link to="/search" className="px-3 py-2 rounded hover:bg-green-700 transition duration-300 nav-link lg:text-lg ">
             Искать в Коране
           </Link>
-          <Link to="/hadith-bukhari" className="px-3 py-2 rounded hover:bg-green-700 transition duration-300 nav-link lg:text-lg lg:p-1">
+          <Link to="/hadith-bukhari" className="px-3 py-2 rounded hover:bg-green-700 transition duration-300 nav-link lg:text-lg ">
             Хадисы
           </Link>
         </div>
@@ -45,6 +45,8 @@ function Nav() {
         </div>
       </div>
       <div className={`nav-container mt-5 ${isOpen ? 'open' : ''}`}>
+      <h1 className="text-3xl font-bold md:text-lg sm:text-base md:text-center">﷽</h1>
+
         <Link to="/" className="block px-4 py-2  hover:bg-green-700 transition duration-300 nav-link border-b-2 " onClick={toggleMenu}>
           Все Суры
         </Link>

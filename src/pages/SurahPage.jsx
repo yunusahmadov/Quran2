@@ -3,10 +3,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import ico from '../images/ayah.png';
-
 import norepeat from '../images/no-repeat.png'
 import repeat from '../images/repeat.png'
-
 
 function SurahPage() {
   const { surahNumber } = useParams();
@@ -16,10 +14,12 @@ function SurahPage() {
   const [arabText, setArabText] = useState([]);
   const [arabTextVisible, setArabTextVisible] = useState(true);
   const [selectedAyah, setSelectedAyah] = useState(null);
-  const [audioEdition, setAudioEdition] = useState('ar.alafasy'); // Default audio edition identifier
+  const [audioEdition, setAudioEdition] = useState('ar.alafasy');
   const [audioEditions, setAudioEditions] = useState([]);
   const [isLooping, setIsLooping] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingError, setLoadingError] = useState('');
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -27,17 +27,20 @@ function SurahPage() {
       .then(response => {
         setAyahs(response.data.data.ayahs);
         setSurahName(response.data.data.englishName);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error fetching Surah ayahs:', error);
+        setLoadingError('Ошибка загрузки данных суры.');
+        setIsLoading(false);
       });
   }, [surahNumber]);
 
   useEffect(() => {
     const fetchQuranText = async () => {
       try {
-        const response = await axios.get('  ');
-        setArabText(response.data.data.surahs[Number(surahNumber) - 1].ayahs);
+        const response = await axios.get(`https://api.alquran.cloud/v1/surah/${surahNumber}`);
+        setArabText(response.data.data.ayahs);
       } catch (error) {
         console.error('Error fetching Quran text:', error);
       }
@@ -63,8 +66,6 @@ function SurahPage() {
   const fetchAyahAudio = async (ayahNumber) => {
     try {
       const response = await axios.get(`https://api.alquran.cloud/v1/ayah/${surahNumber}:${ayahNumber}/${audioEdition}`);
-      console.log(response.data.data.audio);
-
       return response.data.data.audio;
     } catch (error) {
       console.error('Error fetching Ayah audio:', error);
@@ -88,10 +89,17 @@ function SurahPage() {
     }
   };
 
-  // Filter ayahs based on search query
   const filteredAyahs = ayahs.filter(ayah =>
     ayah.text.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // if (isLoading) {
+  //   return <div>Загрузка...</div>;
+  // }
+
+  if (loadingError) {
+    return <div>{loadingError}</div>;
+  }
 
   return (
     <div className="p-5">
@@ -99,22 +107,21 @@ function SurahPage() {
         <h1 className='surah-name'>Сура- </h1>
         <h2 className='text-2xl surah-name'>{surahName}</h2>
       </div>
-      <div className='flex flex-col gap-5 p-8'>
-        <div className="flex items-center justify-between gap-4 sm:flex-col ">
+      <div className='flex flex-col gap-5 p-7'>
+        <div className="flex items-center justify-between gap-4 md:flex-col ">
           <button className='btn-toggle text-md' onClick={() => setArabTextVisible(!arabTextVisible)}>
             {arabTextVisible ? 'Скрыть Арабский текст' : 'Показать Арабский текст'}
           </button>
-          <div className="flex justify-center items-center gap-2">
+          <div className="flex justify-center items-center gap-2 sm:flex-col">
             <p className='choose text-lg'>Выберите чтеца:</p>
           <Select
-            className="select-reader w-[210px]"
+            className="select-reader w-[210px] "
             value={audioEditions.find(option => option.value === audioEdition)}
             onChange={handleReaderChange}
             options={audioEditions}
           />
           </div>
         </div>
-        {/* Search Input */}
         <div className="mb-4">
           <input
             type="text"
@@ -130,14 +137,16 @@ function SurahPage() {
             className='ayah-card cursor-pointer p-4 mb-4 bg-white rounded-lg shadow-lg transition-transform duration-200 ease-in-out transform '
             onClick={() => handleAyahClick(ayah, index)}
           >
-            <div className='flex p-5 md:flex-col justify-center items-center '>
+            <div className='flex p-4 md:flex-col justify-center items-center sm:p-0'>
               <div className='relative flex items-center justify-center'>
                 <img src={ico} alt="" className='ayah-icon' />
                 <p className='absolute top-[9px] text-xl font-bold text-gray-700'>{ayah.numberInSurah}</p>
               </div>
-              <div className='flex flex-col w-full ml-5 md:justify-center items-center'>
-                <div className='ayah-text text-lg'>{ayah.text}</div>
-                {arabTextVisible && <div className='arabic-text text-lg'>{arabText[index]?.text}</div>}
+              <div className='flex flex-col w-full md:justify-center items-center'>
+                <div className='ayah-text text-lg sm:text-sm'>{ayah.text}</div>
+                {arabTextVisible && <div className='arabic-text text-lg sm:text-sm'>
+                  {arabText.length ? arabText[index]?.text : <p>Загрузка...</p>}
+                </div>}
               </div>
             </div>
           </div>
@@ -153,7 +162,7 @@ function SurahPage() {
               <div className="audio-player">
                 <audio ref={audioRef} src={selectedAyah.audio} className="w-full mt-4" controls />
                 <button onClick={toggleLoop} className="loop-button">
-                <img className="w-6 ml-4 mt-2" src={isLooping ? norepeat : repeat} alt="Loop Toggle" />
+                  <img className="w-6 ml-4 mt-2" src={isLooping ? norepeat : repeat} alt="Loop Toggle" />
                 </button>
               </div>
             )}
