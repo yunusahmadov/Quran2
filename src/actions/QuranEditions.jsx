@@ -40,6 +40,10 @@ function QuranEditions() {
 
   return (
     <div className="p-5">
+
+      <div className="flex justify-center items-center">
+        <h1 className="text-center title-page">Все суры</h1>
+      </div>
       <div className="flex items-center bg-gray-100 p-5 rounded-lg shadow-md mb-6">
         <input
           className="input-search"
@@ -48,9 +52,6 @@ function QuranEditions() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </div>
-      <div className="flex justify-center items-center">
-        <h1 className="text-center title-page">Все суры</h1>
       </div>
       <div className="flex flex-col gap-5">
         {filteredQuranText.map((text) => (
